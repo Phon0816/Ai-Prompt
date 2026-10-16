@@ -1,0 +1,281 @@
+[
+  {
+    "id": "nvidia/nemotron-3-super-120b-a12b:free",
+    "name": "NVIDIA Nemotron 3 Super 120B (Free)",
+    "provider": "NVIDIA",
+    "context_window": 262144,
+    "cost_tier": "free",
+    "cost_per_1m_input": 0.0,
+    "cost_per_1m_output": 0.0,
+    "speed": 3,
+    "vietnamese": 4,
+    "task_fit": {
+      "code_generation": 5,
+      "debugging": 5,
+      "system_architecture": 5,
+      "security_audit": 4,
+      "medical_literature": 4,
+      "clinical_explanation": 4,
+      "patient_education": 4,
+      "drug_interaction": 4
+    },
+    "strengths": [
+      "Mô hình Nemotron MoE mạnh cho reasoning, code và prompt engineering",
+      "Xử lý context dài, phù hợp với pipeline skills và prompt nhiều tầng",
+      "Hoàn toàn miễn phí trên OpenRouter API"
+    ],
+    "weaknesses": [
+      "Thời gian sinh token đầu tiên (TTFT) có thể dao động khi server đông người dùng",
+      "Khối lượng tính toán lớn nên không tối ưu cho phản hồi siêu tốc dưới 500ms"
+    ],
+    "recommended_for": ["IT & Lập trình", "Y tế & Chăm sóc sức khỏe"]
+  },
+  {
+    "id": "meta-llama/llama-3.3-70b-instruct:free",
+    "name": "Meta Llama 3.3 70B Instruct (Free)",
+    "provider": "Meta AI",
+    "context_window": 131072,
+    "cost_tier": "free",
+    "cost_per_1m_input": 0.0,
+    "cost_per_1m_output": 0.0,
+    "speed": 4,
+    "vietnamese": 5,
+    "task_fit": {
+      "code_generation": 4,
+      "debugging": 4,
+      "system_architecture": 4,
+      "security_audit": 3,
+      "medical_literature": 4,
+      "clinical_explanation": 5,
+      "patient_education": 5,
+      "drug_interaction": 4
+    },
+    "strengths": [
+      "Khả năng xử lý tiếng Việt rất tự nhiên, văn phong mạch lạc và ân cần",
+      "Tuân thủ nghiêm ngặt các chỉ thị an toàn và Medical Disclaimer y tế",
+      "Tốc độ sinh token nhanh và ổn định, miễn phí trên OpenRouter"
+    ],
+    "weaknesses": [
+      "Khả năng tự động dò lỗi bảo mật sâu chưa thể sánh ngang Claude 3.5 Sonnet",
+      "Có xu hướng giải thích dài đối với các lệnh code ngắn gọn"
+    ],
+    "recommended_for": ["Y tế & Chăm sóc sức khỏe", "IT & Lập trình"]
+  },
+  {
+    "id": "deepseek/deepseek-r1:free",
+    "name": "DeepSeek R1 (Reasoning Free)",
+    "provider": "DeepSeek",
+    "context_window": 65536,
+    "cost_tier": "free",
+    "cost_per_1m_input": 0.0,
+    "cost_per_1m_output": 0.0,
+    "speed": 3,
+    "vietnamese": 4,
+    "task_fit": {
+      "code_generation": 5,
+      "debugging": 5,
+      "system_architecture": 5,
+      "security_audit": 5,
+      "medical_literature": 5,
+      "clinical_explanation": 4,
+      "patient_education": 3,
+      "drug_interaction": 5
+    },
+    "strengths": [
+      "Mô hình suy luận chuỗi tư duy (Chain-of-Thought) hàng đầu thế giới",
+      "Giải quyết các thuật toán hóc búa, phân tích root-cause bug và tương tác thuốc cực kỳ sâu sắc",
+      "Tự động phản biện và sửa sai trong quá trình tư duy"
+    ],
+    "weaknesses": [
+      "Phản hồi dài do sinh kèm khối tư duy reasoning",
+      "Không tối ưu cho giao tiếp giải thích đơn giản với người bệnh đại chúng"
+    ],
+    "recommended_for": ["IT & Lập trình", "Y tế & Chăm sóc sức khỏe"]
+  },
+  {
+    "id": "google/gemini-2.0-flash-001",
+    "name": "Google Gemini 2.0 Flash",
+    "provider": "Google",
+    "context_window": 1048576,
+    "cost_tier": "low",
+    "cost_per_1m_input": 0.1,
+    "cost_per_1m_output": 0.4,
+    "speed": 5,
+    "vietnamese": 5,
+    "task_fit": {
+      "code_generation": 4,
+      "debugging": 4,
+      "system_architecture": 4,
+      "security_audit": 3,
+      "medical_literature": 5,
+      "clinical_explanation": 5,
+      "patient_education": 5,
+      "drug_interaction": 4
+    },
+    "strengths": [
+      "Tốc độ phản hồi cực nhanh (5/5) với độ trễ thấp",
+      "Cửa sổ ngữ cảnh khổng lồ 1.000.000 tokens, xử lý toàn bộ tập hồ sơ bệnh án hoặc codebase lớn",
+      "Tiếng Việt tự nhiên và chi phí sử dụng siêu tiết kiệm"
+    ],
+    "weaknesses": [
+      "Đôi khi có xu hướng tóm lược code nếu prompt không chỉ định xuất toàn bộ mã nguồn",
+      "Cần prompt chặt chẽ để duy trì cấu trúc JSON nghiêm ngặt"
+    ],
+    "recommended_for": ["Y tế & Chăm sóc sức khỏe", "IT & Lập trình"]
+  },
+  {
+    "id": "anthropic/claude-3.5-sonnet",
+    "name": "Claude 3.5 Sonnet",
+    "provider": "Anthropic",
+    "context_window": 200000,
+    "cost_tier": "medium",
+    "cost_per_1m_input": 3.0,
+    "cost_per_1m_output": 15.0,
+    "speed": 4,
+    "vietnamese": 4,
+    "task_fit": {
+      "code_generation": 5,
+      "debugging": 5,
+      "system_architecture": 5,
+      "security_audit": 5,
+      "medical_literature": 5,
+      "clinical_explanation": 4,
+      "patient_education": 4,
+      "drug_interaction": 4
+    },
+    "strengths": [
+      "Chuẩn mực cao nhất hiện nay cho kỹ thuật phần mềm, kiến trúc phân tán và audit bảo mật",
+      "Viết mã nguồn sạch, xử lý edge cases triệt để và tuân thủ chặt chẽ design patterns",
+      "Khả năng hiểu bối cảnh kỹ thuật sâu sắc không bị ảo giác"
+    ],
+    "weaknesses": [
+      "Là mô hình thương mại trả phí có chi phí token cao hơn các lựa chọn mã nguồn mở",
+      "Chính sách an toàn nghiêm ngặt có thể từ chối các prompt liên quan đến kiểm thử xâm nhập nếu không giải thích rõ mục đích học thuật"
+    ],
+    "recommended_for": ["IT & Lập trình"]
+  },
+  {
+    "id": "openai/gpt-4o",
+    "name": "OpenAI GPT-4o",
+    "provider": "OpenAI",
+    "context_window": 128000,
+    "cost_tier": "medium",
+    "cost_per_1m_input": 2.5,
+    "cost_per_1m_output": 10.0,
+    "speed": 4,
+    "vietnamese": 5,
+    "task_fit": {
+      "code_generation": 4,
+      "debugging": 4,
+      "system_architecture": 4,
+      "security_audit": 4,
+      "medical_literature": 5,
+      "clinical_explanation": 5,
+      "patient_education": 5,
+      "drug_interaction": 5
+    },
+    "strengths": [
+      "Cơ sở tri thức y sinh học toàn diện, hiểu sâu các tiêu chuẩn lâm sàng quốc tế (WHO, CDC, FDA)",
+      "Lập luận chẩn đoán phân biệt y khoa đa chiều và đối chiếu triệu chứng rất vững vàng",
+      "Khả năng đa nhiệm toàn diện cho cả IT và Y tế"
+    ],
+    "weaknesses": [
+      "Chi phí tương đối cao",
+      "Khả năng sinh code chuyên sâu các framework mới đôi khi không sắc bén bằng Claude 3.5 Sonnet"
+    ],
+    "recommended_for": ["Y tế & Chăm sóc sức khỏe", "IT & Lập trình"]
+  },
+  {
+    "id": "openai/gpt-4o-mini",
+    "name": "OpenAI GPT-4o-mini",
+    "provider": "OpenAI",
+    "context_window": 128000,
+    "cost_tier": "low",
+    "cost_per_1m_input": 0.15,
+    "cost_per_1m_output": 0.6,
+    "speed": 5,
+    "vietnamese": 4,
+    "task_fit": {
+      "code_generation": 4,
+      "debugging": 4,
+      "system_architecture": 3,
+      "security_audit": 3,
+      "medical_literature": 4,
+      "clinical_explanation": 4,
+      "patient_education": 4,
+      "drug_interaction": 3
+    },
+    "strengths": [
+      "Tốc độ cực nhanh, giá thành rẻ, hiệu năng vượt trội so với kích thước",
+      "Lý tưởng cho các tác vụ kiểm tra nhanh, định dạng dữ liệu và giải thích ngắn gọn",
+      "Độ trễ thấp, ít gặp tình trạng quá tải"
+    ],
+    "weaknesses": [
+      "Khả năng thiết kế kiến trúc hệ thống quy mô lớn hoặc phân tích ca bệnh phức tạp có giới hạn",
+      "Có thể bỏ sót các edge cases tinh vi trong lập trình"
+    ],
+    "recommended_for": ["IT & Lập trình", "Y tế & Chăm sóc sức khỏe"]
+  },
+  {
+    "id": "qwen/qwen-2.5-coder-32b-instruct",
+    "name": "Qwen 2.5 Coder 32B Instruct",
+    "provider": "Alibaba Cloud",
+    "context_window": 32768,
+    "cost_tier": "low",
+    "cost_per_1m_input": 0.18,
+    "cost_per_1m_output": 0.18,
+    "speed": 4,
+    "vietnamese": 4,
+    "task_fit": {
+      "code_generation": 5,
+      "debugging": 5,
+      "system_architecture": 4,
+      "security_audit": 4,
+      "medical_literature": 2,
+      "clinical_explanation": 2,
+      "patient_education": 2,
+      "drug_interaction": 2
+    },
+    "strengths": [
+      "Được huấn luyện chuyên biệt hóa cao độ cho hơn 92 ngôn ngữ lập trình",
+      "Khả năng viết mã thuật toán chuẩn xác, tối ưu thời gian chạy và ít lỗi cú pháp",
+      "Chi phí token rất rẻ, tốc độ xử lý nhanh"
+    ],
+    "weaknesses": [
+      "Không phù hợp cho các tác vụ dịch thuật y khoa, chẩn đoán hay tóm tắt nghiên cứu y học",
+      "Ngữ cảnh 32k tokens hạn chế khi đọc các file codebase quá dài"
+    ],
+    "recommended_for": ["IT & Lập trình"]
+  },
+  {
+    "id": "poolside/laguna-s-2.1:free",
+    "name": "Poolside Laguna S 2.1 (Free Critic)",
+    "provider": "Poolside AI",
+    "context_window": 65536,
+    "cost_tier": "free",
+    "cost_per_1m_input": 0.0,
+    "cost_per_1m_output": 0.0,
+    "speed": 4,
+    "vietnamese": 4,
+    "task_fit": {
+      "code_generation": 4,
+      "debugging": 5,
+      "system_architecture": 5,
+      "security_audit": 5,
+      "medical_literature": 4,
+      "clinical_explanation": 4,
+      "patient_education": 3,
+      "drug_interaction": 4
+    },
+    "strengths": [
+      "Mô hình chuyên biệt về code review, kiểm toán kẽ hở logic và phản biện kỹ thuật (Adversarial Critic)",
+      "Đóng vai trò tác tử phản biện (Critic Agent) vạch lá tìm sâu các lỗi bảo mật và thiếu sót ràng buộc",
+      "Hoàn toàn miễn phí 100% trên OpenRouter API"
+    ],
+    "weaknesses": [
+      "Được tối ưu cho đánh giá, phản biện và phát hiện lỗ hổng hơn là viết văn xuôi dài",
+      "Có thể kết hợp với Laguna Critic để rà soát prompt trước khi thực thi"
+    ],
+    "recommended_for": ["IT & Lập trình", "Tác tử Phản biện Multi-Agent"]
+  }
+]

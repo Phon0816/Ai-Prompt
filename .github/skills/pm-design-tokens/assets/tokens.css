@@ -1,0 +1,120 @@
+/* AI-Prompt-Manager — design tokens (giao diện SÁNG, tương phản dịu).
+   Nguồn sự thật duy nhất cho màu / chữ / khoảng cách / bo góc / bóng / chuyển động.
+   Đổi giá trị Ở ĐÂY rồi chạy lại:
+   python .github/skills/pm-design-tokens/scripts/check_contrast.py <đường dẫn file này> */
+
+:root {
+  color-scheme: light;
+
+  /* ── Nền: 3 lớp độ sáng. Tách lớp bằng độ sáng + bóng nhẹ, không bằng viền đậm ── */
+  --bg-app: #F5F4FB;      /* nền trang */
+  --bg-surface: #FDFCFF;  /* thẻ, panel (không dùng #FFF thuần để đỡ chói) */
+  --bg-sunken: #ECEAF6;   /* vùng lõm: khung prompt, code, thanh tiến độ trống */
+  --bg-scrim: rgb(55 53 80 / 0.36);
+
+  /* ── Chữ: 3 bậc, đều ≥ 4.5:1. Không dùng #000 / #FFF cho chữ hoặc nền ── */
+  --ink-1: #373550;       /* tiêu đề, thân bài  (~10–11:1, dịu hơn đen thuần 21:1) */
+  --ink-2: #5A5874;       /* mô tả, nhãn phụ    (~6:1) */
+  --ink-3: #67647F;       /* meta, placeholder  (≥ 4.5:1 cả trên nền lõm) */
+  --ink-disabled: #A3A1BA;/* chỉ cho trạng thái disabled (được miễn tỉ lệ) */
+
+  /* ── Đường kẻ ── */
+  --line-soft: #E2E0EF;     /* trang trí: ngăn khối, viền thẻ */
+  --line-control: #8584A3;  /* ô nhập / checkbox / toggle — cần ≥ 3:1 (WCAG 1.4.11) */
+
+  /* ── Thương hiệu = hành động. Nút đặc: nền --brand + chữ --on-brand ── */
+  --brand: #5B4DD6;
+  --brand-hover: #4D3FC4;
+  --brand-press: #4235AD;
+  --on-brand: #FFFFFF;
+  --brand-tint: #EDEAFD;   /* nền được chọn / hover nhẹ */
+  --brand-ink: #3F33A8;    /* chữ trên --brand-tint */
+
+  /* ── Trạng thái (luôn kèm icon + chữ, không chỉ màu) ── */
+  --ok-bg: #DFF3E7;   --ok-ink: #17603A;
+  --err-bg: #FFE3E8;  --err-ink: #A0173A;
+
+  /* ── Safety guardrail: cam đào, CHỈ dùng cho guardrail / cảnh báo an toàn ── */
+  --safety-bg: #FFE9D6;
+  --safety-ink: #7F3A08;
+  --safety-line: #C0661F;
+
+  /* ── Nhận diện lĩnh vực: chọn theo hash id lĩnh vực, KHÔNG gắn cứng theo tên.
+        Cố ý tránh xanh lá / đỏ / cam để không nhầm với ok / err / safety ── */
+  --hue-sky-bg: #DCEBFB;     --hue-sky-ink: #1D4E89;
+  --hue-orchid-bg: #F7E0F0;  --hue-orchid-ink: #7A2A63;
+  --hue-butter-bg: #FBEFC4;  --hue-butter-ink: #6B4E00;
+  --hue-sand-bg: #EFE8DC;    --hue-sand-ink: #5E4B2E;
+
+  /* ── Chữ ── */
+  --font-ui: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --fs-xs: 0.75rem;    /* 12 — chỉ cho meta ngắn */
+  --fs-sm: 0.875rem;   /* 14 */
+  --fs-md: 1rem;       /* 16 — thân bài & ô nhập (≥16 để iOS không tự zoom) */
+  --fs-lg: 1.125rem;   /* 18 */
+  --fs-xl: 1.375rem;   /* 22 */
+  --fs-2xl: 1.75rem;   /* 28 */
+  --fs-3xl: 2.25rem;   /* 36 */
+  --lh-body: 1.6;      /* tiếng Việt có dấu chồng: không đặt thân bài < 1.5 */
+  --lh-ui: 1.45;
+  --lh-head: 1.3;      /* tiêu đề không đặt < 1.25 */
+  --measure: 68ch;     /* độ rộng dòng tối đa cho prompt / câu trả lời dài */
+
+  /* ── Khoảng cách (bước 4px) ── */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px;
+  --tap: 44px;         /* vùng chạm tối thiểu trên điện thoại */
+  --content-max: 72rem;
+
+  /* ── Bo góc theo cấp bậc (đừng dùng một radius cho mọi thứ) ── */
+  --r-xs: 6px;    /* chip, tag */
+  --r-sm: 10px;   /* nút, ô nhập */
+  --r-md: 16px;   /* thẻ */
+  --r-lg: 24px;   /* modal, bottom sheet */
+  --r-pill: 999px;
+
+  /* ── Bóng 3 cấp, nhuộm theo màu chữ thay vì đen ── */
+  --shadow-1: 0 1px 2px rgb(55 53 80 / 0.06), 0 1px 1px rgb(55 53 80 / 0.04);
+  --shadow-2: 0 4px 12px rgb(55 53 80 / 0.08);
+  --shadow-3: 0 12px 32px rgb(55 53 80 / 0.14);
+
+  /* ── Chuyển động: chỉ để phản hồi hành động của người dùng ── */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-1: 120ms;
+  --dur-2: 200ms;
+}
+
+/* Gán màu lĩnh vực: <Chip data-hue="sky"> */
+[data-hue="sky"]    { --hue-bg: var(--hue-sky-bg);    --hue-ink: var(--hue-sky-ink); }
+[data-hue="orchid"] { --hue-bg: var(--hue-orchid-bg); --hue-ink: var(--hue-orchid-ink); }
+[data-hue="butter"] { --hue-bg: var(--hue-butter-bg); --hue-ink: var(--hue-butter-ink); }
+[data-hue="sand"]   { --hue-bg: var(--hue-sand-bg);   --hue-ink: var(--hue-sand-ink); }
+
+/* ── Nền tảng tối thiểu ── */
+html { font-family: var(--font-ui); }
+body {
+  margin: 0;
+  background: var(--bg-app);
+  color: var(--ink-1);
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+}
+button, input, textarea, select { font: inherit; }
+input, textarea, select { font-size: max(1rem, 16px); }
+::placeholder { color: var(--ink-3); opacity: 1; }
+
+:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

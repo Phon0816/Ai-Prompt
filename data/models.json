@@ -1,0 +1,80 @@
+{
+  "recommended_models": [
+    {
+      "id": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "name": "Nvidia Nemotron 3 Ultra (Free via OpenRouter)",
+      "provider": "NVIDIA",
+      "context_length": "128k tokens",
+      "pricing": "Free",
+      "best_for": ["IT", "Healthcare"],
+      "description": "Mô hình MoE mạnh mẽ, ngữ cảnh lớn, xử lý code và phân tích chuyên sâu cực tốt.",
+      "strengths": [
+        "Khả năng suy luận logic và kiến trúc mã nguồn xuất sắc",
+        "Tóm tắt tài liệu kỹ thuật và y văn dài chính xác",
+        "Hoàn toàn miễn phí trên OpenRouter"
+      ],
+      "recommended_tasks": [
+        "Viết mã nguồn & Thuật toán phức tạp",
+        "Gỡ lỗi (Debug) & Tối ưu code",
+        "Tóm tắt Y văn & Nghiên cứu khoa học"
+      ]
+    },
+    {
+      "id": "meta-llama/llama-3.3-70b-instruct:free",
+      "name": "Meta Llama 3.3 70B Instruct (Free via OpenRouter)",
+      "provider": "Meta AI",
+      "context_length": "128k tokens",
+      "pricing": "Free",
+      "best_for": ["IT", "Healthcare"],
+      "description": "Mô hình mã nguồn mở thế hệ mới với hiệu năng tương đương GPT-4o, phản hồi tự nhiên và mạch lạc.",
+      "strengths": [
+        "Giao tiếp thân thiện, giải thích triệu chứng y khoa dễ hiểu",
+        "Hỗ trợ song ngữ Anh - Việt rất chuẩn xác",
+        "Tuân thủ nghiêm ngặt định dạng Markdown và disclaimer"
+      ],
+      "recommended_tasks": [
+        "Giải thích thuật ngữ & Triệu chứng lâm sàng",
+        "Soạn tài liệu hướng dẫn bệnh nhân",
+        "Giải thích code cho Junior Developers"
+      ]
+    },
+    {
+      "id": "anthropic/claude-3.5-sonnet",
+      "name": "Claude 3.5 Sonnet",
+      "provider": "Anthropic",
+      "context_length": "200k tokens",
+      "pricing": "Commercial Tier",
+      "best_for": ["IT"],
+      "description": "Chuẩn mực hàng đầu hiện nay cho Software Engineering, refactoring mã nguồn và kiến trúc phức tạp.",
+      "strengths": [
+        "Khả năng sinh code không lỗi cao nhất hiện nay",
+        "Hiểu sâu các edge cases và hệ thống phân tán",
+        "Viết test case và documentation cực kỳ chi tiết"
+      ],
+      "recommended_tasks": [
+        "Thiết kế kiến trúc hệ thống & Database",
+        "Đánh giá bảo mật & Kiểm thử lỗ hổng",
+        "Tối ưu hiệu năng ứng dụng quy mô lớn"
+      ]
+    },
+    {
+      "id": "openai/gpt-4o",
+      "name": "GPT-4o (Omni)",
+      "provider": "OpenAI",
+      "context_length": "128k tokens",
+      "pricing": "Commercial Tier",
+      "best_for": ["Healthcare", "IT"],
+      "description": "Mô hình đa nhiệm toàn diện với cơ sở tri thức y sinh học và tiêu chuẩn FDA/WHO chuẩn mực.",
+      "strengths": [
+        "Kiến thức y khoa học thuật và dịch tễ học phong phú",
+        "Lập luận chẩn đoán phân biệt đa chiều",
+        "Khả năng phân tích tương tác thuốc & dược lý lâm sàng"
+      ],
+      "recommended_tasks": [
+        "Tra cứu tương tác & Dược động học tham khảo",
+        "Phân tích ca lâm sàng nghiên cứu",
+        "Tổng hợp y văn đa ngôn ngữ"
+      ]
+    }
+  ]
+}
