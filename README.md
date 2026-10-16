@@ -195,3 +195,5 @@ Skill được chuẩn hóa qua `SkillManifest` trong `backend/models/skill_mode
 - `budget`: giới hạn context/instruction tokens.
 
 `SkillRegistry` vẫn tương thích với `backend/data/domains/*.json` và `.github/skills/*/SKILL.md`. `SkillCompiler` validate, chọn skill deterministic, gắn confidence và cắt context theo ngân sách trước khi gửi vào system message của model.
+#   A i - P r o m t  
+ 
