@@ -15,6 +15,8 @@ const skillGroups = {
   'Domain packs': [
     ['IT & product', 'Practical patterns for technical explanations, specs, and launch writing.'],
     ['Healthcare', 'Careful, plain-language structures for clinical and patient-facing work.'],
+    ['Marketing', 'Campaign, content, audience, and measurement structures with clear assumptions.'],
+    ['Education', 'Lesson, tutoring, assessment, and learning-material structures for educators.'],
   ],
   'Quality checks': [
     ['Clarity pass', 'Finds ambiguity, missing context, and instructions that compete with each other.'],

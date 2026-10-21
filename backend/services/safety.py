@@ -63,8 +63,10 @@ def check_safety(raw_prompt: str, domain_id: str, domain_pack: Optional[Dict[str
             if flag_clean and flag_clean in text_lower:
                 if domain_id == "healthcare":
                     alerts.append(f"Từ khóa y tế nguy hiểm: '{flag}' — Bắt buộc kích hoạt Guardrail cảnh báo y tế.")
-                else:
+                elif domain_id == "it":
                     alerts.append(f"Cảnh báo rủi ro an ninh phần mềm: Phát hiện từ khóa '{flag}'.")
+                else:
+                    alerts.append(f"Cảnh báo an toàn lĩnh vực: Phát hiện từ khóa '{flag}'. Cần kiểm duyệt trước khi sử dụng.")
 
     # 2. Kiểm tra theo bộ mẫu Regular Expression chuyên sâu
     if domain_id == "healthcare":

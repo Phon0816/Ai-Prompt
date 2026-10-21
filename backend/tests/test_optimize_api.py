@@ -45,7 +45,9 @@ class TestOptimizeEndpoint(unittest.TestCase):
             self.assertIsNone(data["ai_raw_response"])
             self.assertEqual(data["execution_source"], "openrouter")
         else:
-            self.assertIn("OpenRouter", res.json()["detail"])
+            detail = res.json()["detail"]
+            message = detail.get("message", "") if isinstance(detail, dict) else detail
+            self.assertIn("OpenRouter", message)
 
 if __name__ == "__main__":
     unittest.main()

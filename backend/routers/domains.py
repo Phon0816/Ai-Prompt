@@ -5,7 +5,7 @@ from ..services.skill_registry import skill_registry
 
 router = APIRouter(prefix="/api/domains", tags=["Domains"])
 
-KNOWN_DOMAINS = ["it", "healthcare"]
+KNOWN_DOMAINS = ["it", "healthcare", "marketing", "education"]
 
 @router.get("", response_model=List[DomainCardSummary])
 async def list_domains():

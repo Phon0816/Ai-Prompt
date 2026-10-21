@@ -1,12 +1,20 @@
 import React from 'react';
 
 export default function DomainCard({ domain, isSelected, onSelect }) {
-  const isHealthcare = domain.id === 'healthcare';
-
   return (
     <div
       className={`domain-card ${isSelected ? 'selected' : ''} ${domain.id}`}
       onClick={() => onSelect(domain)}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          onSelect(domain);
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-pressed={isSelected}
+      aria-label={`${isSelected ? 'Đã chọn' : 'Chọn'} lĩnh vực ${domain.name}`}
     >
       {/* Top Header of Card */}
       <div className="domain-card-header">
@@ -15,6 +23,17 @@ export default function DomainCard({ domain, isSelected, onSelect }) {
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="16 18 22 12 16 6" />
               <polyline points="8 6 2 12 8 18" />
+            </svg>
+          ) : domain.icon === 'megaphone' ? (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m3 11 18-5v12L3 14v-3Z" />
+              <path d="M11.6 16.2 13 21H9l-1.8-6.1" />
+              <path d="M5 10v5" />
+            </svg>
+          ) : domain.icon === 'book-open' ? (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M2 4.8A2.8 2.8 0 0 1 4.8 2H12v18H4.8A2.8 2.8 0 0 0 2 22Z" />
+              <path d="M22 4.8A2.8 2.8 0 0 0 19.2 2H12v18h7.2a2.8 2.8 0 0 1 2.8 2Z" />
             </svg>
           ) : (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

@@ -25,7 +25,7 @@ router = APIRouter(tags=["Optimize & Scoring"])
 
 def _provider_http_error(exc: ProviderError) -> HTTPException:
     return HTTPException(
-        status_code=exc.status_code or 502,
+        status_code=502,
         detail={
             "code": exc.error_code,
             "message": str(exc),

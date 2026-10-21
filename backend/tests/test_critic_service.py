@@ -1,5 +1,6 @@
 import unittest
 import asyncio
+import os
 from backend.services.critic_service import run_generator_critic_loop, generate_local_critique
 from backend.services.storage import storage_service
 
@@ -25,6 +26,9 @@ class TestCriticService(unittest.TestCase):
         self.assertTrue(any("cấp cứu" in c.lower() or "đối chiếu" in c.lower() for c in critiques))
 
     def test_generator_critic_loop_flow(self):
+        if os.getenv("RUN_LIVE_PROVIDER_TESTS") != "1":
+            self.skipTest("Set RUN_LIVE_PROVIDER_TESTS=1 to run cloud-provider integration tests.")
+
         async def _test():
             domain_pack = await storage_service.read_json("domains/it.json")
             prompt_v2, slots, raw_score, v2_score, report = await run_generator_critic_loop(

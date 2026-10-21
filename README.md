@@ -1,6 +1,6 @@
 # AI Prompt Optimizer & Model Recommender
 
-> **Đồ án:** Ứng dụng Web khuyến nghị mô hình AI và tối ưu hóa câu lệnh (Prompt) theo ngữ cảnh cho từng lĩnh vực chuyên ngành (IT & Lập trình, Y tế & Chăm sóc sức khỏe).
+> **Đồ án:** Ứng dụng Web khuyến nghị mô hình AI và tối ưu hóa câu lệnh (Prompt) theo ngữ cảnh cho từng lĩnh vực chuyên ngành (IT & Lập trình, Y tế & Chăm sóc sức khỏe, Marketing, Giáo dục).
 
 ---
 
@@ -9,7 +9,7 @@
 Ứng dụng được thiết kế theo chuẩn **Senior Full-Stack & Prompt Engineering**, giải quyết triệt để vấn đề prompt mơ hồ và khuyến nghị mô hình không chính xác:
 
 1. **Giao diện Wizard 4 Bước Chuyên nghiệp + 2 Tab Phụ**:
-   - **Bước 1: Chọn Lĩnh vực**: DomainCard trực quan (IT & Healthcare), danh sách nhiệm vụ điển hình, cảnh báo an toàn y tế bắt buộc.
+   - **Bước 1: Chọn Lĩnh vực**: DomainCard trực quan (IT, Healthcare, Marketing, Education), danh sách nhiệm vụ điển hình và cảnh báo an toàn theo domain.
    - **Bước 2: Nhập Yêu cầu**: Template picker theo chuyên ngành, ô nhập prompt với real-time scoring (ScoreRing 0–10 theo 8 tiêu chí rubric), phát hiện từ khóa nguy hiểm y khoa (Red Flags) tức thì, nút gạt **Bật/Tắt Chế độ Multi-Agent Phản biện (Generator - Critic Loop)**.
    - **Bước 3: Khuyến nghị Mô hình AI**: Thuật toán đa tiêu chí (Task Fit, Vietnamese, Cost, Speed), 4 thanh trượt trọng số cập nhật điểm và thứ hạng real-time, giải thích lý do cụ thể bằng tiếng Việt.
    - **Bước 4: Kết quả & Đối sánh**:
@@ -55,8 +55,10 @@ AI-Prompt/
 │   │   ├── models.json             # 8 mô hình AI hàng đầu kèm chỉ số chi tiết
 │   │   ├── history.json            # Lưu trữ lịch sử các phiên chạy
 │   │   └── domains/
-│   │       ├── it.json             # Glossary, red flags, và 4 templates IT chuyên sâu
-│   │       └── healthcare.json     # Glossary, red flags, và 4 templates Y tế chuẩn chứng cứ
+│   │       ├── it.json             # Glossary, red flags, và templates IT chuyên sâu
+│   │       ├── healthcare.json     # Glossary, red flags, và templates Y tế chuẩn chứng cứ
+│   │       ├── marketing.json      # Content, campaign, audience và measurement skills
+│   │       └── education.json      # Lesson, tutoring, assessment và learning-material skills
 │   └── tests/
 │       ├── test_rubric.py          # Unit tests cho Rubric & Safety
 │       ├── test_scoring.py         # Unit tests cho Model Scoring

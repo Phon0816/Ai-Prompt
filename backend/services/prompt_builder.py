@@ -143,22 +143,26 @@ def build_optimized_prompt(
     # SLOT 1: Vai trò (Role Prompting)
     if clean_domain == "it":
         role_content = "Bạn là chuyên gia IT phù hợp nhất với yêu cầu hiện tại: " + signals["intent"] + "."
-    else:
+    elif clean_domain == "healthcare":
         role_content = (
             "Bạn là một Bác sĩ chuyên khoa và Nhà nghiên cứu Y học chứng cứ (Evidence-based Medicine), "
             f"đang tập trung vào nhiệm vụ: {signals['intent']}."
+        )
+    else:
+        role_content = (
+            f"Bạn là chuyên gia {domain_pack.get('name', 'theo lĩnh vực')} phù hợp nhất với yêu cầu hiện tại: "
+            f"{signals['intent']}."
         )
     if system_prompt:
         role_content += f"\nQuy chuẩn của template [{template_title}]:\n{system_prompt}"
 
     # SLOT 2: Bối cảnh & Thuật ngữ (Context Envelope)
-    if clean_domain == "it":
-        context_content = (
-            f"Bối cảnh nhiệm vụ: Người dùng đang yêu cầu {signals['intent']}.\n"
-            f"Thuật ngữ được phát hiện trong prompt: {signal_entities}\n"
-            f"Thuật ngữ liên quan:\n{glossary_str}"
-        )
-    else:
+    context_content = (
+        f"Bối cảnh nhiệm vụ: Người dùng đang yêu cầu {signals['intent']}.\n"
+        f"Thuật ngữ được phát hiện trong prompt: {signal_entities}\n"
+        f"Thuật ngữ liên quan của lĩnh vực:\n{glossary_str}"
+    )
+    if clean_domain == "healthcare":
         context_content = (
             f"Bối cảnh nhiệm vụ: Người dùng đang yêu cầu {signals['intent']}, "
             f"với mục tiêu thông tin y khoa an toàn.\n"
@@ -182,12 +186,20 @@ def build_optimized_prompt(
             "4. KHÔNG VIẾT CODE GIẢ: Cung cấp mã nguồn hoàn chỉnh có thể chạy được, không bỏ dở câu lệnh.\n"
             f"5. RÀNG BUỘC RÚT RA TỪ YÊU CẦU:\n{signal_constraints}"
         )
-    else:
+    elif clean_domain == "healthcare":
         constraints_content = (
             "1. KHÔNG CHẨN ĐOÁN THAY THẾ: Tuyệt đối KHÔNG khẳng định người dùng mắc bệnh cụ thể hoặc kê đơn thuốc trực tuyến.\n"
             "2. KHÔNG CHỈ ĐỊNH LIỀU LƯỢNG TRỊ LIỆU: Mọi thông tin dược lý chỉ mang tính chất tham khảo cơ chế học thuật.\n"
             "3. DẤU HIỆU CẢNH BÁO ĐỎ: Bắt buộc liệt kê các triệu chứng khẩn cấp (Red Flags) cần đưa người bệnh đến bệnh viện ngay lập tức.\n"
             "4. DỰA TRÊN BẰNG CHỨNG: Chỉ nêu các thông tin được chứng minh trong y văn có đối chứng.\n"
+            f"5. RÀNG BUỘC RÚT RA TỪ YÊU CẦU:\n{signal_constraints}"
+        )
+    else:
+        constraints_content = (
+            "1. BÁM SÁT MỤC TIÊU: Không tự thay đổi đối tượng, phạm vi hoặc kết quả mong muốn của người dùng.\n"
+            "2. PHÂN BIỆT DỮ KIỆN VÀ GIẢ ĐỊNH: Đánh dấu thông tin chưa được kiểm chứng và nêu câu hỏi còn thiếu.\n"
+            "3. MINH BẠCH NGUỒN: Không bịa số liệu, trích dẫn, kết quả, testimonial hoặc tiêu chuẩn chuyên ngành.\n"
+            "4. TÍNH BAO TRÙM VÀ AN TOÀN: Tránh định kiến, thao túng, phân biệt đối xử và tiết lộ dữ liệu cá nhân.\n"
             f"5. RÀNG BUỘC RÚT RA TỪ YÊU CẦU:\n{signal_constraints}"
         )
 
@@ -197,7 +209,7 @@ def build_optimized_prompt(
         if clean_domain == "it":
             default_format = "Markdown có cấu trúc gồm: 1. Đánh giá kiến trúc; 2. Mã nguồn hoàn chỉnh kèm type hints; 3. Phân tích độ phức tạp O(n); 4. Ca kiểm thử biên (Edge cases)."
         else:
-            default_format = "Markdown có cấu trúc gồm: 1. Cơ chế sinh lý bệnh; 2. Bằng chứng y học lâm sàng; 3. Dấu hiệu cần khám cấp cứu; 4. Cảnh báo y tế bắt buộc."
+            default_format = "Markdown có cấu trúc gồm: 1. Bối cảnh và mục tiêu; 2. Phân tích; 3. Đề xuất triển khai; 4. Giả định, rủi ro và bước kiểm chứng."
     output_format_content = (
         f"Định dạng nền của template/domain:\n{default_format}\n"
         f"Điều chỉnh theo yêu cầu cụ thể của người dùng: ưu tiên {signal_artifacts}."
@@ -210,7 +222,7 @@ def build_optimized_prompt(
         for alert in safety_alerts:
             safety_lines.append(f"- {alert}")
     
-    if clean_domain == "healthcare" and required_disclaimer:
+    if required_disclaimer:
         safety_lines.append(f"\n{required_disclaimer}")
     elif clean_domain == "it":
         safety_lines.append("Mã nguồn và hướng dẫn phải đảm bảo an toàn tuyệt đối cho môi trường thử nghiệm và vận hành.")
