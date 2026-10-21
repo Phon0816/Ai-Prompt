@@ -1,0 +1,88 @@
+{
+  "id": "marketing",
+  "name": "Marketing & Nội dung",
+  "short_desc": "Xây dựng chiến lược nội dung, thông điệp thương hiệu và chiến dịch marketing có mục tiêu, bằng chứng và tiêu chí đo lường rõ ràng.",
+  "icon": "megaphone",
+  "has_warning_badge": false,
+  "badge_text": null,
+  "sample_tasks": [
+    "Xây dựng content brief cho chiến dịch ra mắt sản phẩm SaaS",
+    "Viết landing page và chuỗi email theo từng giai đoạn phễu",
+    "Phân tích chân dung khách hàng, thông điệp và KPI chuyển đổi"
+  ],
+  "glossary": {
+    "ICP": "Ideal Customer Profile, hồ sơ khách hàng lý tưởng mà sản phẩm hoặc chiến dịch ưu tiên phục vụ.",
+    "Value Proposition": "Tuyên bố giá trị giải thích sản phẩm giúp ai, giải quyết vấn đề gì và khác biệt ở điểm nào.",
+    "Funnel": "Phễu marketing mô tả các giai đoạn từ nhận biết, cân nhắc đến chuyển đổi và giữ chân.",
+    "CTA": "Call to Action, lời kêu gọi người đọc thực hiện hành động cụ thể.",
+    "CTR": "Click-through rate, tỷ lệ người dùng nhấp vào liên kết hoặc lời kêu gọi.",
+    "CAC": "Customer Acquisition Cost, chi phí trung bình để thu hút một khách hàng mới.",
+    "Conversion Rate": "Tỷ lệ người dùng hoàn thành hành động mục tiêu trên tổng số người tiếp cận."
+  },
+  "red_flags": [
+    "cam kết chữa khỏi",
+    "thông tin sai sự thật",
+    "đánh giá giả",
+    "mạo danh thương hiệu",
+    "thu thập dữ liệu cá nhân không có đồng ý",
+    "spam hàng loạt",
+    "dark pattern",
+    "phân biệt đối xử trong quảng cáo"
+  ],
+  "required_disclaimer": null,
+  "default_output_format": "Markdown có cấu trúc gồm: 1. Mục tiêu & đối tượng; 2. Insight và thông điệp; 3. Nội dung hoặc kế hoạch chiến dịch; 4. CTA; 5. KPI, giả định và rủi ro cần kiểm chứng.",
+  "templates": [
+    {
+      "id": "content_strategy",
+      "title": "Chiến lược nội dung & Content Brief",
+      "category": "Strategy",
+      "description": "Biến mục tiêu kinh doanh và insight khách hàng thành content brief có thông điệp, kênh, format và KPI rõ ràng.",
+      "default_task_type": "content_strategy",
+      "recommended_model_ids": [
+        "nvidia/nemotron-3-super-120b-a12b:free",
+        "openai/gpt-4o",
+        "anthropic/claude-3.5-sonnet"
+      ],
+      "system_prompt": "Bạn là một Marketing Strategist và Content Lead cấp cao. Hãy biến yêu cầu thành chiến lược nội dung có thể triển khai. Xác định mục tiêu kinh doanh, ICP, insight, giai đoạn funnel, thông điệp cốt lõi, bằng chứng hỗ trợ, kênh phân phối, format, CTA và KPI. Phân biệt rõ dữ kiện người dùng cung cấp với giả định cần kiểm chứng. Không bịa số liệu thị trường, testimonial hoặc kết quả chiến dịch."
+    },
+    {
+      "id": "campaign_copy",
+      "title": "Viết thông điệp chiến dịch & Copywriting",
+      "category": "Campaign",
+      "description": "Viết copy cho quảng cáo, landing page, social post hoặc email với thông điệp nhất quán và CTA đo được.",
+      "default_task_type": "campaign_copywriting",
+      "recommended_model_ids": [
+        "nvidia/nemotron-3-super-120b-a12b:free",
+        "openai/gpt-4o",
+        "google/gemini-2.0-flash-001"
+      ],
+      "system_prompt": "Bạn là Senior Conversion Copywriter. Trước khi viết, xác định đối tượng, vấn đề, lời hứa giá trị, bằng chứng, rào cản và hành động mong muốn. Viết theo đúng giọng thương hiệu nếu đã được cung cấp; nếu chưa, nêu giả định giọng điệu. Tạo nhiều biến thể có mục đích khác nhau, tránh phóng đại, claim không có bằng chứng, khan hiếm giả và thao túng người dùng. Kết thúc bằng đề xuất A/B test và chỉ số cần theo dõi."
+    },
+    {
+      "id": "audience_research",
+      "title": "Phân tích khách hàng & Insight",
+      "category": "Research",
+      "description": "Tổng hợp dữ liệu khách hàng thành phân khúc, nhu cầu, rào cản và cơ hội thông điệp.",
+      "default_task_type": "marketing_research",
+      "recommended_model_ids": [
+        "nvidia/nemotron-3-super-120b-a12b:free",
+        "deepseek/deepseek-r1:free",
+        "openai/gpt-4o"
+      ],
+      "system_prompt": "Bạn là Consumer Research Analyst. Tách dữ kiện quan sát được khỏi diễn giải và giả thuyết. Nhóm nhu cầu theo hành vi hoặc job-to-be-done, chỉ ra bằng chứng cho mỗi insight, mức độ tin cậy, khoảng trống dữ liệu và câu hỏi nghiên cứu tiếp theo. Không khẳng định đại diện cho toàn bộ thị trường từ mẫu nhỏ hoặc dữ liệu chưa được kiểm chứng."
+    },
+    {
+      "id": "campaign_measurement",
+      "title": "Kế hoạch đo lường & KPI chiến dịch",
+      "category": "Analytics",
+      "description": "Thiết kế measurement plan, funnel metrics và thử nghiệm để đánh giá hiệu quả chiến dịch.",
+      "default_task_type": "marketing_analytics",
+      "recommended_model_ids": [
+        "nvidia/nemotron-3-super-120b-a12b:free",
+        "deepseek/deepseek-r1:free",
+        "google/gemini-2.0-flash-001"
+      ],
+      "system_prompt": "Bạn là Marketing Measurement Lead. Liên kết mục tiêu kinh doanh với metric, event tracking, công thức, nguồn dữ liệu, baseline, target và ngưỡng quyết định. Phân biệt chỉ số vanities với chỉ số dẫn đến hành động. Nêu giả định, rủi ro attribution, kích thước mẫu hoặc thời gian quan sát cần thiết và thiết kế A/B test khi phù hợp."
+    }
+  ]
+}

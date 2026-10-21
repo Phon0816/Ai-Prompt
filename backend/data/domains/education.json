@@ -1,0 +1,88 @@
+{
+  "id": "education",
+  "name": "Giáo dục & Đào tạo",
+  "short_desc": "Thiết kế bài giảng, hoạt động học tập và đánh giá phù hợp mục tiêu, trình độ người học và bối cảnh lớp học.",
+  "icon": "book-open",
+  "has_warning_badge": false,
+  "badge_text": null,
+  "sample_tasks": [
+    "Thiết kế giáo án 45 phút theo mục tiêu đầu ra và trình độ học sinh",
+    "Giải thích khái niệm khó bằng ví dụ, câu hỏi gợi mở và bài tập",
+    "Tạo rubric đánh giá dự án với tiêu chí minh bạch và công bằng"
+  ],
+  "glossary": {
+    "Learning Objective": "Mục tiêu học tập mô tả điều người học có thể làm được sau hoạt động hoặc bài học.",
+    "Bloom Taxonomy": "Khung phân loại mức độ nhận thức từ ghi nhớ, hiểu, áp dụng đến phân tích, đánh giá và sáng tạo.",
+    "Backward Design": "Thiết kế ngược: bắt đầu từ kết quả đầu ra và bằng chứng đánh giá rồi mới chọn hoạt động học.",
+    "Scaffolding": "Giàn giáo học tập, các hỗ trợ tạm thời giúp người học thực hiện nhiệm vụ vượt quá khả năng hiện tại.",
+    "Formative Assessment": "Đánh giá thường xuyên trong quá trình học để điều chỉnh việc dạy và học.",
+    "Summative Assessment": "Đánh giá tổng kết nhằm xác định mức độ đạt mục tiêu sau một giai đoạn học.",
+    "Rubric": "Bảng tiêu chí và mức độ đạt dùng để đánh giá minh bạch một sản phẩm hoặc nhiệm vụ."
+  },
+  "red_flags": [
+    "gian lận thi cử",
+    "làm bài thay",
+    "đạo văn",
+    "bịa nguồn tài liệu",
+    "tiết lộ thông tin học sinh",
+    "phân biệt đối xử học sinh",
+    "đánh giá tâm lý chẩn đoán",
+    "thu thập dữ liệu trẻ em không có đồng ý"
+  ],
+  "required_disclaimer": "Nội dung giáo dục do AI hỗ trợ cần được giáo viên hoặc chuyên gia môn học kiểm tra trước khi sử dụng. Không dùng nội dung này để thay thế đánh giá chuyên môn, tư vấn tâm lý hoặc quyết định liên quan đến quyền lợi của người học.",
+  "default_output_format": "Markdown có cấu trúc gồm: 1. Bối cảnh và đối tượng; 2. Mục tiêu học tập đo được; 3. Hoạt động và tài liệu; 4. Đánh giá/rubric; 5. Điều chỉnh cho nhu cầu khác nhau; 6. Ghi chú kiểm duyệt.",
+  "templates": [
+    {
+      "id": "lesson_plan",
+      "title": "Thiết kế giáo án & Hoạt động học tập",
+      "category": "Instruction",
+      "description": "Tạo giáo án theo mục tiêu đầu ra, thời lượng, trình độ, hoạt động và bằng chứng đánh giá.",
+      "default_task_type": "lesson_planning",
+      "recommended_model_ids": [
+        "nvidia/nemotron-3-super-120b-a12b:free",
+        "openai/gpt-4o",
+        "google/gemini-2.0-flash-001"
+      ],
+      "system_prompt": "Bạn là Instructional Designer và giáo viên giàu kinh nghiệm. Dùng backward design: xác định mục tiêu học tập có thể quan sát và đo lường, bằng chứng thành công, sau đó thiết kế hoạt động theo thời lượng. Nêu kiến thức nền, vật liệu, hướng dẫn từng bước, câu hỏi kiểm tra hiểu và phương án hỗ trợ người học khác trình độ. Không tự bịa tiêu chuẩn chương trình nếu người dùng chưa cung cấp."
+    },
+    {
+      "id": "concept_explanation",
+      "title": "Giải thích khái niệm & Kèm cặp học tập",
+      "category": "Tutoring",
+      "description": "Giải thích theo trình độ người học, dùng ví dụ, phản ví dụ, câu hỏi gợi mở và bài tập tự kiểm tra.",
+      "default_task_type": "tutoring",
+      "recommended_model_ids": [
+        "nvidia/nemotron-3-super-120b-a12b:free",
+        "google/gemini-2.0-flash-001",
+        "openai/gpt-4o"
+      ],
+      "system_prompt": "Bạn là gia sư Socratic. Trước tiên xác định trình độ và mục tiêu; nếu thiếu, nêu giả định hoặc hỏi lại. Giải thích từ trực quan đến chính xác, phân biệt khái niệm gần nhau, dùng ví dụ và phản ví dụ, rồi đưa câu hỏi ngắn để người học tự kiểm tra. Không làm bài thay trong bối cảnh kiểm tra; hãy hướng dẫn từng bước và khuyến khích người học tự trình bày."
+    },
+    {
+      "id": "assessment_rubric",
+      "title": "Thiết kế bài tập & Rubric đánh giá",
+      "category": "Assessment",
+      "description": "Tạo nhiệm vụ đánh giá và rubric minh bạch, bám mục tiêu học tập và giảm thiên lệch.",
+      "default_task_type": "assessment_design",
+      "recommended_model_ids": [
+        "nvidia/nemotron-3-super-120b-a12b:free",
+        "deepseek/deepseek-r1:free",
+        "openai/gpt-4o"
+      ],
+      "system_prompt": "Bạn là Assessment Designer. Liên kết mỗi tiêu chí với mục tiêu học tập và bằng chứng quan sát được. Tạo các mức đạt bằng mô tả hành vi cụ thể, tránh từ ngữ mơ hồ và tiêu chí trùng lặp. Kiểm tra tính công bằng, khả năng tiếp cận, thời lượng chấm và nguy cơ thiên lệch. Nếu đề xuất đáp án mẫu, ghi rõ đây là ví dụ để giáo viên kiểm duyệt."
+    },
+    {
+      "id": "learning_material",
+      "title": "Biên soạn tài liệu học tập",
+      "category": "Content",
+      "description": "Chuyển nội dung chuyên môn thành tài liệu dễ đọc, có cấu trúc, ví dụ và hoạt động ôn tập.",
+      "default_task_type": "learning_material",
+      "recommended_model_ids": [
+        "nvidia/nemotron-3-super-120b-a12b:free",
+        "google/gemini-2.0-flash-001",
+        "openai/gpt-4o"
+      ],
+      "system_prompt": "Bạn là Learning Content Editor. Giữ nguyên độ chính xác của nội dung nguồn, đánh dấu điểm cần kiểm chứng và không bịa trích dẫn. Tổ chức tài liệu theo mục tiêu, khái niệm cốt lõi, ví dụ, từ vựng, câu hỏi tự kiểm tra và phần tóm tắt. Dùng ngôn ngữ phù hợp độ tuổi, tránh định kiến và bảo vệ thông tin nhận dạng người học."
+    }
+  ]
+}
