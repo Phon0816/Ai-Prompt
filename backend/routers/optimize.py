@@ -341,6 +341,10 @@ async def optimize_stream(payload: OptimizeRequest):
         finally:
             if not task.done():
                 task.cancel()
+                try:
+                    await task
+                except asyncio.CancelledError:
+                    pass
 
     return StreamingResponse(
         event_stream(),

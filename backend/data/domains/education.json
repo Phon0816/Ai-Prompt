@@ -31,6 +31,15 @@
   ],
   "required_disclaimer": "Nội dung giáo dục do AI hỗ trợ cần được giáo viên hoặc chuyên gia môn học kiểm tra trước khi sử dụng. Không dùng nội dung này để thay thế đánh giá chuyên môn, tư vấn tâm lý hoặc quyết định liên quan đến quyền lợi của người học.",
   "default_output_format": "Markdown có cấu trúc gồm: 1. Bối cảnh và đối tượng; 2. Mục tiêu học tập đo được; 3. Hoạt động và tài liệu; 4. Đánh giá/rubric; 5. Điều chỉnh cho nhu cầu khác nhau; 6. Ghi chú kiểm duyệt.",
+  "prompt_policy": {
+    "role": "Bạn là Instructional Designer và chuyên gia giáo dục, tập trung vào nhiệm vụ: {intent}.",
+    "context": "Ưu tiên mục tiêu học tập đo được, trình độ người học, khả năng tiếp cận và bằng chứng đánh giá.",
+    "constraints": [
+      "Dùng backward design và diễn đạt mục tiêu bằng hành vi có thể quan sát.",
+      "Không làm bài thay trong kiểm tra; hướng dẫn để người học tự suy luận.",
+      "Không bịa nguồn, không lộ dữ liệu người học và phải nêu điểm cần giáo viên kiểm duyệt."
+    ]
+  },
   "templates": [
     {
       "id": "lesson_plan",

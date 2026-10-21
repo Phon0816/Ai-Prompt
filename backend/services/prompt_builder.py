@@ -128,6 +128,7 @@ def build_optimized_prompt(
     # 2. Kiểm tra an toàn và từ khóa đỏ
     safety_alerts = check_safety(raw_clean, clean_domain, domain_pack)
     required_disclaimer = domain_pack.get("required_disclaimer")
+    prompt_policy = domain_pack.get("prompt_policy", {})
 
     # 3. Trích xuất thuật ngữ chuyên ngành (Glossary)
     glossary = domain_pack.get("glossary", {})
@@ -141,7 +142,9 @@ def build_optimized_prompt(
     # 4. Định hình 6 SLOTS KỸ THUẬT:
     
     # SLOT 1: Vai trò (Role Prompting)
-    if clean_domain == "it":
+    if prompt_policy.get("role"):
+        role_content = prompt_policy["role"].format(intent=signals["intent"])
+    elif clean_domain == "it":
         role_content = "Bạn là chuyên gia IT phù hợp nhất với yêu cầu hiện tại: " + signals["intent"] + "."
     elif clean_domain == "healthcare":
         role_content = (
@@ -162,6 +165,8 @@ def build_optimized_prompt(
         f"Thuật ngữ được phát hiện trong prompt: {signal_entities}\n"
         f"Thuật ngữ liên quan của lĩnh vực:\n{glossary_str}"
     )
+    if prompt_policy.get("context"):
+        context_content += f"\nGóc nhìn lĩnh vực: {prompt_policy['context']}"
     if clean_domain == "healthcare":
         context_content = (
             f"Bối cảnh nhiệm vụ: Người dùng đang yêu cầu {signals['intent']}, "
@@ -194,6 +199,10 @@ def build_optimized_prompt(
             "4. DỰA TRÊN BẰNG CHỨNG: Chỉ nêu các thông tin được chứng minh trong y văn có đối chứng.\n"
             f"5. RÀNG BUỘC RÚT RA TỪ YÊU CẦU:\n{signal_constraints}"
         )
+    elif prompt_policy.get("constraints"):
+        constraints_content = "\n".join(
+            f"{index}. {item}" for index, item in enumerate(prompt_policy["constraints"], start=1)
+        ) + f"\n{len(prompt_policy['constraints']) + 1}. RÀNG BUỘC RÚT RA TỪ YÊU CẦU:\n{signal_constraints}"
     else:
         constraints_content = (
             "1. BÁM SÁT MỤC TIÊU: Không tự thay đổi đối tượng, phạm vi hoặc kết quả mong muốn của người dùng.\n"

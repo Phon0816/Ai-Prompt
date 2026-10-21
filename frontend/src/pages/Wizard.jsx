@@ -121,6 +121,7 @@ export default function Wizard() {
   const [execStep, setExecStep] = useState(1);
   const [execLogs, setExecLogs] = useState([]);
   const [liveElapsedMs, setLiveElapsedMs] = useState(0);
+  const executionAbortRef = useRef(null);
   const [showTracePanel, setShowTracePanel] = useState(false);
   const logContainerRef = useRef(null);
   const [toastMessage, setToastMessage] = useState('');
@@ -274,6 +275,9 @@ export default function Wizard() {
     if (currentStep !== 4 || !selectedDomain || !selectedModel) return;
 
     async function runPipeline() {
+      const controller = new AbortController();
+      executionAbortRef.current?.abort();
+      executionAbortRef.current = controller;
       setIsExecuting(true);
       setExecStep(1);
       const startTime = Date.now();
@@ -314,7 +318,8 @@ export default function Wizard() {
               type: eventData.status === 'skipped' ? 'SKIP' : (isStarted ? 'PHASE' : 'DONE'),
               text: `${eventData.phase}: ${isStarted ? 'đang chạy' : eventData.status === 'skipped' ? 'bỏ qua theo chế độ hiện tại' : `hoàn tất trong ${eventData.duration_ms}ms`}`
             }]);
-          }
+          },
+          controller.signal
         );
         setExecStep(4);
         setLiveElapsedMs(data.execution_time_ms);
@@ -325,6 +330,14 @@ export default function Wizard() {
         }]);
         setOptimizationResult(data);
       } catch (err) {
+        if (err.name === 'AbortError') {
+          setExecLogs(prev => [...prev, {
+            time: `${Date.now() - startTime}ms`,
+            type: 'SYS',
+            text: 'Đã dừng request đang xử lý.'
+          }]);
+          return;
+        }
         setExecLogs(prev => [
           ...prev,
           { time: `${Date.now() - startTime}ms`, type: 'ERROR', text: `✕ Lỗi thực thi pipeline${err.requestId ? ` [${err.requestId}]` : ''}: ${err.message || 'Lỗi không xác định'}` }
@@ -334,6 +347,9 @@ export default function Wizard() {
       } finally {
         window.clearInterval(elapsedTimer);
         setIsExecuting(false);
+        if (executionAbortRef.current === controller) {
+          executionAbortRef.current = null;
+        }
       }
     }
 
@@ -341,6 +357,7 @@ export default function Wizard() {
     if (!optimizationResult || optimizationResult.model_used !== selectedModel.id) {
       runPipeline();
     }
+    return () => executionAbortRef.current?.abort();
   }, [currentStep, selectedDomain, selectedModel, selectedTemplate, rawPrompt, enableCritic, executionMode]);
 
   // Xử lý chọn domain ở Bước 1
@@ -1025,6 +1042,13 @@ ${optimizationResult.ai_raw_response || '(Không có phản hồi)'}
                     <span className="lec-badge-model">Mục tiêu: {selectedModel?.name}</span>
                     <span className="lec-badge-engine">{enableCritic ? 'Multi-Agent (Nemotron ⟷ Laguna)' : 'Single-Agent Pipeline'}</span>
                     <span className="lec-badge-engine">⏱ {(liveElapsedMs / 1000).toFixed(1)}s</span>
+                    <button
+                      type="button"
+                      className="button button-secondary"
+                      onClick={() => executionAbortRef.current?.abort()}
+                    >
+                      Dừng xử lý
+                    </button>
                   </div>
                 </div>
 

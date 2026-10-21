@@ -87,7 +87,7 @@ export async function fetchRecommendations(domainId, templateId = null, rawPromp
   return await res.json();
 }
 
-export async function optimizePrompt(domainId, templateId, rawPrompt, selectedModelId, runAi = true, enableCritic = false, compareRaw = false, executionMode = 'fast', onEvent = null) {
+export async function optimizePrompt(domainId, templateId, rawPrompt, selectedModelId, runAi = true, enableCritic = false, compareRaw = false, executionMode = 'fast', onEvent = null, signal = undefined) {
   const payload = {
     domain_id: domainId,
     template_id: templateId,
@@ -104,13 +104,16 @@ export async function optimizePrompt(domainId, templateId, rawPrompt, selectedMo
     res = await fetch(`${API_BASE}/optimize/stream`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      signal
     });
   } catch (err) {
+    if (err.name === 'AbortError') throw err;
     res = await fetch('http://127.0.0.1:8000/api/optimize/stream', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      signal
     });
   }
 
@@ -149,17 +152,21 @@ export async function optimizePrompt(domainId, templateId, rawPrompt, selectedMo
     }
   };
 
-  while (true) {
-    const { value, done } = await reader.read();
-    buffer += decoder.decode(value || new Uint8Array(), { stream: !done });
-    const blocks = buffer.split(/\r?\n\r?\n/);
-    buffer = blocks.pop() || '';
-    for (const block of blocks) {
-      if (block.trim()) handleEvent(block);
+  try {
+    while (true) {
+      const { value, done } = await reader.read();
+      buffer += decoder.decode(value || new Uint8Array(), { stream: !done });
+      const blocks = buffer.split(/\r?\n\r?\n/);
+      buffer = blocks.pop() || '';
+      for (const block of blocks) {
+        if (block.trim()) handleEvent(block);
+      }
+      if (done) break;
     }
-    if (done) break;
+    if (buffer.trim()) handleEvent(buffer);
+  } finally {
+    reader.releaseLock();
   }
-  if (buffer.trim()) handleEvent(buffer);
   if (!result) throw new Error('Backend kết thúc luồng mà không trả về kết quả');
   result.request_id = result.telemetry?.request_id || result.request_id || null;
   return result;

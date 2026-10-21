@@ -68,16 +68,17 @@ def check_safety(raw_prompt: str, domain_id: str, domain_pack: Optional[Dict[str
                 else:
                     alerts.append(f"Cảnh báo an toàn lĩnh vực: Phát hiện từ khóa '{flag}'. Cần kiểm duyệt trước khi sử dụng.")
 
-    # 2. Kiểm tra theo bộ mẫu Regular Expression chuyên sâu
-    if domain_id == "healthcare":
-        for item in CRITICAL_HEALTHCARE_PATTERNS:
-            if re.search(item["pattern"], text_lower):
-                if item["alert"] not in alerts:
-                    alerts.append(item["alert"])
-    elif domain_id == "it":
-        for item in CRITICAL_IT_PATTERNS:
-            if re.search(item["pattern"], text_lower):
-                if item["alert"] not in alerts:
-                    alerts.append(item["alert"])
+    # 2. Ưu tiên regex do domain pack cung cấp; constants chỉ giữ tương thích pack cũ.
+    configured_patterns = domain_pack.get("critical_patterns") if domain_pack else None
+    if configured_patterns is None:
+        configured_patterns = (
+            CRITICAL_HEALTHCARE_PATTERNS if domain_id == "healthcare"
+            else CRITICAL_IT_PATTERNS if domain_id == "it"
+            else []
+        )
+    for item in configured_patterns:
+        if re.search(item["pattern"], text_lower):
+            if item["alert"] not in alerts:
+                alerts.append(item["alert"])
 
     return list(dict.fromkeys(alerts))  # Loại bỏ trùng lặp giữ nguyên thứ tự

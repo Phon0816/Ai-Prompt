@@ -20,60 +20,6 @@ from .llm_client import execute_prompt_with_llm
 from ..config import PRIMARY_MODEL_ID, CRITIC_MODEL_ID
 
 
-def generate_local_critique(domain_id: str, raw_prompt: str, draft_v1: str) -> Tuple[List[str], List[str]]:
-    """
-    Bộ phân tích legacy chỉ dùng cho unit test; runtime Critic luôn chạy qua OpenRouter.
-    """
-    clean_domain = domain_id.lower().strip()
-    raw_lower = raw_prompt.lower()
-
-    critique_points = []
-    improvements = []
-
-    if clean_domain == "it":
-        critique_points.append(
-            "Thiếu ràng buộc về khả năng chịu lỗi (Fault Tolerance): Chưa chỉ định cơ chế Timeout, Retry với Exponential Backoff và Dead Letter Queue."
-        )
-        critique_points.append(
-            "Cấu trúc dữ liệu đầu ra chưa đủ chặt chẽ: Cần quy định rõ Response Schema (Success/Error format, HTTP Status Codes, Error Codes chuẩn REST)."
-        )
-        critique_points.append(
-            "Chưa bao phủ toàn diện Edge Cases: Cần bổ sung kịch bản kiểm thử điều kiện biên (Payload quá cỡ, Race Conditions, dữ liệu rỗng/null, vi phạm khóa ngoại)."
-        )
-
-        improvements.append(
-            "Đã bổ sung mục: 'Quy chuẩn Xử lý Ngoại lệ & Khả năng Chịu lỗi Production' vào Slot Ràng buộc."
-        )
-        improvements.append(
-            "Đã chuẩn hóa Slot Định dạng đầu ra: Bắt buộc kèm TypeScript Interfaces / Pydantic Schemas hoàn chỉnh."
-        )
-        improvements.append(
-            "Đã đính kèm Checklist Kiểm thử biên: 3 ca kiểm thử Edge cases bắt buộc trong phản hồi."
-        )
-    else:
-        critique_points.append(
-            "Chưa phân định rạch ròi giữa chẩn đoán sơ bộ và chẩn đoán phân biệt (Differential Diagnosis): Có thể khiến người đọc hiểu nhầm đây là kết luận duy nhất."
-        )
-        critique_points.append(
-            "Dấu hiệu cảnh báo cấp cứu (Red Flags) chưa được làm nổi bật trực quan: Cần đưa các triệu chứng khẩn cấp lên đầu để bảo đảm an toàn bệnh nhân."
-        )
-        critique_points.append(
-            "Thiếu yêu cầu đối chiếu các xét nghiệm cận lâm sàng bổ trợ: Một chỉ số đơn lẻ không thể phản ánh toàn diện tình trạng bệnh lý."
-        )
-
-        improvements.append(
-            "Đã nâng cấp Slot Vai trò: Nhấn mạnh nguyên tắc Y học chứng cứ (Evidence-based Medicine) và yêu cầu đối chiếu tài liệu UpToDate / Bộ Y tế."
-        )
-        improvements.append(
-            "Đã chèn khối 'Cảnh báo Dấu hiệu Cấp cứu Khẩn cấp' với định dạng nổi bật ở đầu kết quả."
-        )
-        improvements.append(
-            "Đã bổ sung danh mục xét nghiệm cận lâm sàng đối chiếu bắt buộc (AST, GGT, Công thức máu, Siêu âm...)."
-        )
-
-    return critique_points, improvements
-
-
 async def run_generator_critic_loop(
     domain_id: str,
     template_id: str,

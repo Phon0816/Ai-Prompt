@@ -1,7 +1,8 @@
 import unittest
 import asyncio
 import os
-from backend.services.critic_service import run_generator_critic_loop, generate_local_critique
+from backend.services.critic_service import run_generator_critic_loop
+from backend.tests.local_critique_fixtures import generate_local_critique
 from backend.services.storage import storage_service
 
 

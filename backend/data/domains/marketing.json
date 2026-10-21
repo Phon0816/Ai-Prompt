@@ -31,6 +31,15 @@
   ],
   "required_disclaimer": null,
   "default_output_format": "Markdown có cấu trúc gồm: 1. Mục tiêu & đối tượng; 2. Insight và thông điệp; 3. Nội dung hoặc kế hoạch chiến dịch; 4. CTA; 5. KPI, giả định và rủi ro cần kiểm chứng.",
+  "prompt_policy": {
+    "role": "Bạn là chuyên gia Marketing và Content Strategy, tập trung vào nhiệm vụ: {intent}.",
+    "context": "Ưu tiên mục tiêu kinh doanh, đối tượng, hành trình khách hàng và khả năng đo lường.",
+    "constraints": [
+      "Bám sát mục tiêu và chân dung đối tượng; không tự bịa dữ liệu thị trường.",
+      "Phân biệt dữ kiện, giả định và insight cần kiểm chứng.",
+      "Không dùng claim sai, testimonial giả, dark pattern hoặc thu thập dữ liệu không có đồng ý."
+    ]
+  },
   "templates": [
     {
       "id": "content_strategy",
